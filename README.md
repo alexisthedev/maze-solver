@@ -1,3 +1,10 @@
-Maze solver project created for Data Structures class.
+# Maze Solver
 
-Creators: Alex Papadopoulos
+## Description
+
+A program that solves mazes by utilizing a backtracking algorithm and custom implementations of data structures (Linked List, Queue, Stack).
+
+## Creators
+
+* Katerina Mantaraki @katerinamant
+* Alex Papadopoulos  @alexisthedev
