@@ -6,5 +6,5 @@ A program that solves mazes by utilizing a backtracking algorithm and custom imp
 
 ## Creators
 
-* Katerina Mantaraki @katerinamant
-* Alex Papadopoulos  @alexisthedev
+* Katerina Mantaraki [@katerinamant](https://github.com/katerinamant)
+* Alex Papadopoulos [@alexisthedev](https://github.com/alexisthedev)
