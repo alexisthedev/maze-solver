@@ -13,7 +13,6 @@ hs_err_pid*
 .classpath
 .project
 .settings/
-src/module-info.java
 
 # Papyrus Diagram
 src.di
