@@ -1,6 +1,6 @@
 package stack_queue;
 
-import java.util.*;
+import java.util.NoSuchElementException;
 
 public interface LinkedListInterface<T> {	
 	public void pushFront(T data);

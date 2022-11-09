@@ -1,9 +1,8 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
-import java.util.NoSuchElementException;
+import java.util.*;
 import stack_queue.*;
 
 class TestLinkedList {
