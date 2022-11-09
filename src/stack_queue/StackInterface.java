@@ -1,0 +1,1 @@
+package stack_queue;import java.io.PrintStream;import java.util.NoSuchElementException;public interface StackInterface<T> {	public void push(T item);	public T pop() throws NoSuchElementException;	public T peek() throws NoSuchElementException;	public int size();	public boolean isEmpty();	public void printStack(PrintStream stream);}

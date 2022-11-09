@@ -126,7 +126,7 @@ public class LinkedListImpl<T> implements LinkedListInterface<T> {
 		while (curr != null) {
 			res.append(curr.data().toString() + " -> ");
 		}
-		res.append("NULL");
+		res.append("NULL\n");
 		return res.toString();
 	}
 }
