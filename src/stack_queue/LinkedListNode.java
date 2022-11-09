@@ -15,11 +15,11 @@ public class LinkedListNode<T> {
 	}
 
 	public T data() {
-		return this.data;
+		return data;
 	}
 
 	public LinkedListNode<T> next() {
-		return this.next;
+		return next;
 	}
 
 	public void setNext(LinkedListNode<T> next) {
