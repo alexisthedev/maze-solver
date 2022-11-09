@@ -1,6 +1,5 @@
 package stack_queue;
 
-import java.io.PrintStream;
 import java.util.NoSuchElementException;
 
 public interface LinkedListInterface<T> {	
