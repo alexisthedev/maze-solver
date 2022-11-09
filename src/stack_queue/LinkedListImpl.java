@@ -122,14 +122,12 @@ public class LinkedListImpl<T> implements LinkedListInterface<T> {
 	@Override
 	public String toString() {
 		if (this.isEmpty()) return "LinkedList: empty";
-		
 		LinkedListNode<T> curr = this.head;
 		StringBuilder res = new StringBuilder("LinkedList: ");
 		while (curr != null) {
 			res.append(curr.data().toString() + " -> ");
 		}
 		res.append("NULL\n");
-		
 		return res.toString();
 	}
 }

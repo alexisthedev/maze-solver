@@ -35,5 +35,14 @@ public class TestStack {
 		
 		assertThrows(NoSuchElementException.class, () -> s1.pop());
 		assertTrue(s2.pop().equals("foo"));
+		s1.push("first");
+		s1.push("second");
+		s1.push("third");
+		s1.pop();
+		assertTrue(s1.peek().equals("second"));
+		assertTrue(s1.size() == 2);
+		assertTrue(s1.pop().equals("second"));
+		s1.pop();
+		assertThrows(NoSuchElementException.class, () -> s1.pop());
 	}
 }

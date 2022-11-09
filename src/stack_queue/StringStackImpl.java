@@ -25,15 +25,11 @@ public class StringStackImpl implements StringStack{
 	
 	@Override
 	public String pop() throws NoSuchElementException {
-		if(this.stack.isEmpty()) throw new NoSuchElementException("ERROR: List is empty.");
-		
 		return this.stack.popFront();
 	}
 	
 	@Override
 	public String peek() throws NoSuchElementException {
-		if(this.stack.isEmpty()) throw new NoSuchElementException("ERROR: List is empty.");
-		
 		return this.stack.head();
 	}
 	
