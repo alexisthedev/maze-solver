@@ -113,6 +113,7 @@ public class ReadFileApp {
 
 		// Check for extra lines at end of file
 		while ( (line = reader.readLine()) != null) {
+			linenum++;
 			if (line.length() != 0) {
 				reader.close();
 				throw new IOException(String.format("Line %d - More data than expected", linenum));

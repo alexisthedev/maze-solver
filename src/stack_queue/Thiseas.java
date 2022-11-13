@@ -15,14 +15,10 @@ public class Thiseas {
 		ReadFileApp reader = new ReadFileApp();
 		try {
 			reader.ReadFile(file);
-		} catch (IOException e) {
-			System.out.printf("[Error when reading from file: %s]\nException: [%s]\n", file, e);
-		} catch (NumberFormatException e) {
-			System.out.printf("[Error when reading from file: %s]\nException: [%s]\n", file, e);
 		} catch (NullPointerException e) {
 			System.out.printf("[Error when reading from file: %s]\nException: [NullPointerExceptior: File ended abruptly]\n", file);
 		} catch (Exception e) {
-			System.out.printf("[Fatal error when reading from file: %s]\nException: [%s]\n", file, e);
+			System.out.printf("[Error when reading from file: %s]\nException: [%s]\n", file, e);
 		}
 		return reader.getMaze();
 	}
