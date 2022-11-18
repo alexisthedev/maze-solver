@@ -1,5 +1,7 @@
 package stack_queue;
 
+import java.util.ArrayList;
+
 public class Thiseas {
 	static ReadFileApp reader = new ReadFileApp();
 
@@ -31,39 +33,52 @@ public class Thiseas {
 		// Get maze entrance coordinates
 		int e_x = reader.getEntrance()[0], e_y = reader.getEntrance()[1];
 
+		int x = e_x; int y = e_y;
 		StackStruct<int[]> path = new StackStruct<int[]>();
 		path.push(new int[] {e_x, e_y});
-		while (!path.isEmpty()) {
-			// Get current position from stack's top
-			int x = path.peek()[0], y = path.peek()[1];
-
+		while (true) {
 			// Check if we have reached an exit
 			if (maze[x][y] == '0' && checkEdges(x, y, n, m)) {
 				maze[x][y] = '*';
-				maze[e_x][e_y] = 'E';
 				printMaze(maze);
 				return new int[] {x, y};
 			}
 
-			maze[x][y] = '*';
+			if(maze[x][y] != 'E') maze[x][y] = '*';
 
 			// Checks neighboring cells to find unvisited paths
-			if (x != 0 && maze[x-1][y] == '0') {
-				path.push(new int[] {x-1, y});
-			} else if (y != m-1 && maze[x][y+1] == '0') {
-				path.push(new int[] {x, y+1});
-			} else if (x != n-1 && maze[x+1][y] == '0') {
-				path.push(new int[] {x+1, y});
-			} else if (y != 0 && maze[x][y-1] == '0') {
-				path.push(new int[] {x, y-1});
-			} else {
+			ArrayList<int[]> neighbors = getNeighbors(maze, x, y, n, m);
+			if (neighbors.size() == 0 && !path.isEmpty()) {
+				x = path.peek()[0];
+				y = path.peek()[1];
 				path.pop();
-				maze[x][y] = '1';
+			} else if (neighbors.size() == 0 && path.isEmpty()){
+				break;
+			} else if (neighbors.size() > 1) {
+				path.push(new int[] {x, y});
+				x = neighbors.get(0)[0];
+				y = neighbors.get(0)[1];
+			} else {
+				x = neighbors.get(0)[0];
+				y = neighbors.get(0)[1];
 			}
-
 		}
 
 		return new int[] {-1, -1};
+	}
+
+	public static ArrayList<int[]> getNeighbors(char[][] maze, int x, int y, int n, int m) {
+		ArrayList<int[]> neighbors = new ArrayList<int[]>();
+		if (x != 0 && maze[x-1][y] == '0')
+			neighbors.add(new int[] {x-1, y});
+		if (y != m-1 && maze[x][y+1] == '0')
+			neighbors.add(new int[] {x, y+1});
+		if (x != n-1 && maze[x+1][y] == '0')
+			neighbors.add(new int[] {x+1, y});
+		if (y != 0 && maze[x][y-1] == '0')
+			neighbors.add(new int[] {x, y-1});
+
+		return neighbors;
 	}
 
 	public static boolean checkEdges(int x, int y, int n, int m) {
