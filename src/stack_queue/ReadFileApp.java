@@ -35,7 +35,8 @@ public class ReadFileApp {
 			String split[] = line.split(" ");
 			if (split.length != 2) {
 				reader.close();
-				throw new IOException(String.format("Line %d - Invalid maze data", linenum));
+				throw new IOException(String.format("[Error when reading from file: %s]\n"
+						+ "Line %d - Invalid maze data", file, linenum));
 			}
 			mazeData[i][0] = Integer.parseInt(split[0]);
 			mazeData[i][1] = Integer.parseInt(split[1]);
@@ -74,15 +75,19 @@ public class ReadFileApp {
 				// Store cell and increment j
 				if (c != '0' && c != '1' && c != 'E') {
 					reader.close();
-					throw new IOException(String.format("Line %d - Invalid maze content ('%c' is not a valid cell)", linenum, c));
+					throw new IOException(String.format(
+							"[Error when reading from file: %s]\n"
+									+ "Line %d - Invalid maze content ('%c' is not a valid cell)",
+									file, linenum, c));
 				}
 
 				// Check that row does not have extra cells
 				if (j >= m) {
 					reader.close();
 					throw new IOException(String.format(
-							"Line %d - Exceeded maze dimensions (Row %d already has %d cells)",
-							linenum, i, m));
+							"[Error when reading from file: %s]\n"
+									+ "Line %d - Exceeded maze dimensions (Row %d already has %d cells)",
+									file, linenum, i, m));
 				}
 
 				maze[i][j++] = c;
@@ -92,8 +97,9 @@ public class ReadFileApp {
 			if (j < m) {
 				reader.close();
 				throw new IOException(String.format(
-						"Line %d - Invalid maze content (Expected %d cells in row %d, found %d)",
-						linenum, m, i, j));
+						"[Error when reading from file: %s]\n"
+								+ "Line %d - Invalid maze content (Expected %d cells in row %d, found %d)",
+								file, linenum, m, i, j));
 			}
 
 			// Increment row count
@@ -105,10 +111,10 @@ public class ReadFileApp {
 			reader.close();
 			throw new IOException(
 					String.format(
-							"Invalid maze entrance coordinates (expected 'E' at (%d, %d), '%c' found)",
-							entrance_x,
-							entrance_y,
-							maze[entrance_x][entrance_y]));
+							"[Error when reading from file: %s]\n"
+									+ "Invalid maze entrance coordinates (expected 'E' at (%d, %d), '%c' found)",
+									file, entrance_x, entrance_y,
+									maze[entrance_x][entrance_y]));
 		}
 
 		// Check for extra lines at end of file
@@ -116,7 +122,10 @@ public class ReadFileApp {
 			linenum++;
 			if (line.length() != 0) {
 				reader.close();
-				throw new IOException(String.format("Line %d - More data than expected", linenum));
+				throw new IOException(String.format(
+						"[Error when reading from file: %s]\n"
+								+ "Line %d - More data than expected",
+								file, linenum));
 			}
 		}
 		reader.close();
@@ -125,5 +134,13 @@ public class ReadFileApp {
 
 	public char[][] getMaze() {
 		return maze;
+	}
+
+	public int[] getDimensions() {
+		return new int[] {n, m};
+	}
+
+	public int[] getEntrance() {
+		return new int[] {entrance_x, entrance_y};
 	}
 }
