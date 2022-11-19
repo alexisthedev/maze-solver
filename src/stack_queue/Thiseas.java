@@ -36,9 +36,8 @@ public class Thiseas {
 		int e_x = reader.getEntrance()[0], e_y = reader.getEntrance()[1];
 
 		int x = e_x; int y = e_y;
-		int prev_x = -1; int prev_y = -1;
 		StackStruct<int[]> path = new StackStruct<int[]>();
-		ArrayList<int[]> neighbors = getNeighbors(maze, x, y, prev_x, prev_y);
+		ArrayList<int[]> neighbors = getNeighbors(maze, x, y);
 		while (neighbors.size()!= 0 || !path.isEmpty()) {
 			// Check if we have reached an exit
 			if (maze[x][y] == '0' && checkEdges(x, y)) {
@@ -51,38 +50,32 @@ public class Thiseas {
 
 			// Checks neighboring cells to find unvisited paths
 			if (neighbors.size() == 0 && !path.isEmpty()) {
-				prev_x = x;
-				prev_y = y;
 				x = path.peek()[0];
 				y = path.peek()[1];
 				path.pop();
 			} else if (neighbors.size() > 1) {
 				path.push(new int[] {x, y});
-				prev_x = x;
-				prev_y = y;
 				x = neighbors.get(0)[0];
 				y = neighbors.get(0)[1];
 			} else {
-				prev_x = x;
-				prev_y = y;
 				x = neighbors.get(0)[0];
 				y = neighbors.get(0)[1];
 			}
-			neighbors = getNeighbors(maze, x, y, prev_x, prev_y);
+			neighbors = getNeighbors(maze, x, y);
 		}
 
 		return new int[] {-1, -1};
 	}
 
-	public static ArrayList<int[]> getNeighbors(char[][] maze, int x, int y, int prev_x, int prev_y) {
+	public static ArrayList<int[]> getNeighbors(char[][] maze, int x, int y) {
 		ArrayList<int[]> neighbors = new ArrayList<int[]>();
-		if (x != 0 && maze[x-1][y] == '0' && x-1 != prev_x)
+		if (x != 0 && maze[x-1][y] == '0')
 			neighbors.add(new int[] {x-1, y});
-		if (y != m-1 && maze[x][y+1] == '0' && y+1 != prev_y)
+		if (y != m-1 && maze[x][y+1] == '0')
 			neighbors.add(new int[] {x, y+1});
-		if (x != n-1 && maze[x+1][y] == '0' && x+1 != prev_x)
+		if (x != n-1 && maze[x+1][y] == '0')
 			neighbors.add(new int[] {x+1, y});
-		if (y != 0 && maze[x][y-1] == '0' && y-1 != prev_y)
+		if (y != 0 && maze[x][y-1] == '0')
 			neighbors.add(new int[] {x, y-1});
 
 		return neighbors;
