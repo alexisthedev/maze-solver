@@ -125,8 +125,9 @@ public class LinkedListImpl<T> implements LinkedListInterface<T> {
 		StringBuilder res = new StringBuilder("LinkedList: ");
 		while (curr != null) {
 			res.append(curr.data().toString() + " -> ");
+			curr = curr.next();
 		}
-		res.append("NULL\n");
+		res.append("NULL");
 		return res.toString();
 	}
 }
