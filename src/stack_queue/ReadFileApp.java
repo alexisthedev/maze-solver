@@ -129,7 +129,7 @@ public class ReadFileApp {
 			}
 		}
 		reader.close();
-		System.out.printf("[Succesfully read from file: %s]\n", file);
+		System.out.printf("[Succesfully read from file: %s]\n\n", file);
 	}
 
 	public char[][] getMaze() {
