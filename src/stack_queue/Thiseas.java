@@ -49,7 +49,7 @@ public class Thiseas {
 			if(maze[x][y] != 'E') maze[x][y] = '*';
 
 			// Checks neighboring cells to find unvisited paths
-			if (neighbors.size() == 0 && !path.isEmpty()) {
+			if (neighbors.size() == 0) {
 				x = path.peek()[0];
 				y = path.peek()[1];
 				path.pop();
