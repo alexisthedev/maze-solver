@@ -10,22 +10,22 @@ import stack_queue.*;
  * @author Alex Papadopoulos
  */
 class TestSinglePointerQueue {
-	private QueueStruct<String> q = new QueueStruct<>();
+	private StringQueueWithOnePointer<String> q = new StringQueueWithOnePointer<>();
 
 	@BeforeAll
 	public static void setUp() {
-		System.out.println("[Running QueueStruct Tests]");
+		System.out.println("[Running StringQueueWithOnePointer Tests]");
 	}
 
 	@AfterAll
 	public static void tearDown() {
-		System.out.println("[Successfuly ran QueueStruct Tests]");
+		System.out.println("[Successfuly ran StringQueueWithOnePointer Tests]");
 	}
 
 	@Test
 	public void test_constructor() {
 		System.out.println("constructor");
-		QueueStruct<Integer> temp = new QueueStruct<Integer>(Arrays.asList(1,2,3,4,5));
+		StringQueueWithOnePointer<Integer> temp = new StringQueueWithOnePointer<Integer>(Arrays.asList(1,2,3,4,5));
 		assertTrue(temp.size() == 5);
 		assertTrue(temp.get() == 1);
 	}

@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class StringQueueWithOnePointer<T> implements QueueInterface<T>{
-	private LinkedListImpl<T> q = new LinkedListImpl<T>();
+	private CircularLinkedList<T> q = new CircularLinkedList<T>();
 
 	public StringQueueWithOnePointer() {
 	}
