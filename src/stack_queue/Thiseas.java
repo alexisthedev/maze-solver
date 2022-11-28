@@ -12,16 +12,24 @@ public class Thiseas {
 		try {
 			reader.ReadFile(args[0]);
 		} catch (NullPointerException e) {
+			/* Other errors are handled and thrown with custom messages
+			 * inside of the ReadFileApp class.
+			 * If an error is caught here, then the only case left
+			 * is an early end of file (EOF) when we expect more data.
+			 */
 			throw new NullPointerException(String.format("[Error when reading from file: %s]\n"
 					+ "\nFile ended abruptly\n",
 					args[0]));
 		}
 
+		// Get maze exit coordinates
 		int[] exit = findExit();
 		if (exit[0] == -1) {
+			// Check for flag (-1) indicating that there is no exit
 			System.out.println("It's a trap! There is no way for Theseus to exit this maze.");
 			return;
 		}
+
 		System.out.printf("\n\nHooray! Theseus has managed to escape through the exit at (%d, %d)!\nSuck it Minotaur.\n", exit[0], exit[1]);
 	}
 
@@ -35,18 +43,25 @@ public class Thiseas {
 		// Get maze entrance coordinates
 		int e_x = reader.getEntrance()[0], e_y = reader.getEntrance()[1];
 
+		// Start searching for an exit at the entrance
 		int x = e_x; int y = e_y;
+
+		// Initialize a stack to keep our path coordinates
 		StackStruct<int[]> path = new StackStruct<int[]>();
+
+		// Initialize a list to keep accessable neighbor cells
+		// Initialized with the neighbors of the entrance cell
 		ArrayList<int[]> neighbors = getNeighbors(maze, x, y);
 		while (neighbors.size()!= 0 || !path.isEmpty()) {
 			// Check if we have reached an exit
-			if (maze[x][y] == '0' && checkEdges(x, y)) {
+			if (maze[x][y] == '0' && checkLimits(x, y)) {
 				maze[x][y] = '*';
 				printMaze(maze);
 				return new int[] {x, y};
 			}
 
-			if(maze[x][y] != 'E') maze[x][y] = '*';
+			// Mark the current cell as visited
+			maze[x][y] = '*';
 
 			// Checks neighboring cells to find unvisited paths
 			if (neighbors.size() == 0) {
@@ -68,20 +83,23 @@ public class Thiseas {
 	}
 
 	public static ArrayList<int[]> getNeighbors(char[][] maze, int x, int y) {
+		// Returns a list of visitable cell neighbors.
+		// A cell is visitable if it is '0' (not '*','1') and
+		// if its coordinates are valid (0<=x<=n-1, 0<=y<=m-1)
 		ArrayList<int[]> neighbors = new ArrayList<int[]>();
-		if (x != 0 && maze[x-1][y] == '0')
+		if (x > 0 && maze[x-1][y] == '0')
 			neighbors.add(new int[] {x-1, y});
-		if (y != m-1 && maze[x][y+1] == '0')
+		if (y < m-1 && maze[x][y+1] == '0')
 			neighbors.add(new int[] {x, y+1});
-		if (x != n-1 && maze[x+1][y] == '0')
+		if (x < n-1 && maze[x+1][y] == '0')
 			neighbors.add(new int[] {x+1, y});
-		if (y != 0 && maze[x][y-1] == '0')
+		if (y > 0 && maze[x][y-1] == '0')
 			neighbors.add(new int[] {x, y-1});
-
 		return neighbors;
 	}
 
-	public static boolean checkEdges(int x, int y) {
+	public static boolean checkLimits(int x, int y) {
+		// Returns true if (x,y) point to a cell at the maze limits
 		return x == 0 || x == n-1 || y == 0 || y == m-1;
 	}
 
