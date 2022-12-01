@@ -1,6 +1,7 @@
 package stack_queue;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class ReadFileApp {
 	/*
@@ -133,7 +134,11 @@ public class ReadFileApp {
 	}
 
 	public char[][] getMaze() {
-		return maze;
+		char[][] res = new char[n][m];
+		for (int i=0; i<n; i++) {
+			res[i] = Arrays.copyOf(maze[i], m);
+		}
+		return res;
 	}
 
 	public int[] getDimensions() {

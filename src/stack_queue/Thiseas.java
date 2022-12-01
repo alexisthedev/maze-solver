@@ -39,10 +39,27 @@ public class Thiseas {
 
 			// Check if we have reached an exit
 			if (maze[x][y] == '0' && checkEdges(x, y, n, m)) {
-				maze[x][y] = '*';
-				maze[e_x][e_y] = 'E';
-				printMaze(maze);
-				return new int[] {x, y};
+				// Keep exit coordinates
+				int[] exit = {x, y};
+
+				// Get copy of maze
+				char[][] mazeCopy = reader.getMaze();
+
+				// Mark exit path with *
+				while (!path.isEmpty()) {
+					x = path.peek()[0];
+					y = path.peek()[1];
+					mazeCopy[x][y] = '*';
+					path.pop();
+				}
+
+				// Mark entrance as E and not as *
+				mazeCopy[e_x][e_y] = 'E';
+
+				// Print the maze that only shows the exit path
+				// and return the exit coordinates
+				printMaze(mazeCopy);
+				return exit;
 			}
 
 			maze[x][y] = '*';
