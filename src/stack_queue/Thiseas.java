@@ -8,13 +8,20 @@ public class Thiseas {
 		try {
 			reader.ReadFile(args[0]);
 		} catch (NullPointerException e) {
+			/* Other errors are handled and thrown with custom messages
+			 * inside of the ReadFileApp class.
+			 * If an error is caught here, then the only case left
+			 * is an early end of file (EOF) when we expect more data.
+			 */
 			throw new NullPointerException(String.format("[Error when reading from file: %s]\n"
 					+ "\nFile ended abruptly\n",
 					args[0]));
 		}
 
+		// Get maze exit coordinates
 		int[] exit = findExit();
 		if (exit[0] == -1) {
+			// Check for flag (-1) indicating that there is no exit
 			System.out.println("It's a trap! There is no way for Theseus to exit this maze.");
 			return;
 		}
@@ -31,8 +38,7 @@ public class Thiseas {
 		// Get maze entrance coordinates
 		int e_x = reader.getEntrance()[0], e_y = reader.getEntrance()[1];
 
-		StackStruct<int[]> path = new StackStruct<int[]>();
-		path.push(new int[] {e_x, e_y});
+		StackStruct<int[]> path = new StackStruct<int[]>(new int[] {e_x, e_y});
 		while (!path.isEmpty()) {
 			// Get current position from stack's top
 			int x = path.peek()[0], y = path.peek()[1];
