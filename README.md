@@ -4,6 +4,8 @@
 
 ## Screenshots
 
+![image](https://user-images.githubusercontent.com/97695022/206875437-93fc6a95-1301-43f2-bb77-0356ac297d0d.png)
+
 ## Description
 
 First, we created our own interface of a Linked List using generics, which is implemented in the `LinkedListImpl` class.
